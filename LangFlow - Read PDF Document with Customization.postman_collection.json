@@ -1,0 +1,121 @@
+{
+  "info": {
+    "_postman_id": "1309276e-5d7e-40d8-8187-99fc8a81e552",
+    "name": "LangFlow - Read PDF Document with Customization",
+    "description": "Postman collection for LangFlow file upload endpoint",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45323061",
+    "_collection_link": "https://go.postman.co/collection/45323061-1309276e-5d7e-40d8-8187-99fc8a81e552?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Upload File to LangFlow",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();\r",
+              "\r",
+              "// Convert Windows backslash to forward slash\r",
+              "const normalizedPath = json.path.replace(/\\\\/g, \"/\");\r",
+              "\r",
+              "// Store for next request\r",
+              "pm.environment.set(\"file_path_1\", normalizedPath);\r",
+              "\r",
+              "console.log(normalizedPath);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "x-api-key",
+            "value": "sk-cOV9cYPT-i4PjRB8CPcxqqGhCXZ8udq_a4ZW4Lman0I",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "postman-cloud:///1f0ff6bd-34fe-4ee0-8f15-aef3ea5f5b8a"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:7860/api/v2/files",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "7860",
+          "path": [
+            "api",
+            "v2",
+            "files"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PDF Document Reader Agent with Customization",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "sk-cOV9cYPT-i4PjRB8CPcxqqGhCXZ8udq_a4ZW4Lman0I",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"output_type\": \"chat\",\r\n    \"input_type\": \"chat\",\r\n    \"tweaks\": {\r\n        \"ChatInput-VJnP0\": {\r\n            \"input_value\": \"What is the ship to address?\",\r\n            \"should_store_message\": true\r\n        },\r\n        \"File-Ho3nh\": {\r\n            \"advanced_mode\": false,\r\n            \"concurrency_multithreading\": 1,\r\n            \"path\": [\r\n                \"{{file_path_1}}\"\r\n            ],\r\n            \"separator\": \"\\n\\n\",\r\n            \"silent_errors\": false\r\n        },\r\n        \"Prompt Template-jkCU1\": {\r\n            \"template\": \"Read the question from the {input} variable and then read the {document} to provide the response.\"\r\n        },\r\n        \"GroqModel-ImYh4\": {\r\n            \"api_key\": \"Groq API Key\",\r\n            \"model_name\": \"llama-3.1-8b-instant\",\r\n            \"temperature\": 0.1\r\n        },\r\n        \"ChatOutput-KAjIP\": {\r\n            \"session_id\": \"\",\r\n            \"should_store_message\": true\r\n        }\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:7860/api/v1/run/549c027c-c239-4bcd-8976-f483228267a4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "7860",
+          "path": [
+            "api",
+            "v1",
+            "run",
+            "549c027c-c239-4bcd-8976-f483228267a4"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "LANGFLOW_BASE_URL",
+      "value": "http://localhost:7860"
+    },
+    {
+      "key": "LANGFLOW_API_KEY",
+      "value": "YOUR_LANGFLOW_API_KEY"
+    }
+  ]
+}
