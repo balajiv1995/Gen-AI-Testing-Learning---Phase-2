@@ -1,0 +1,85 @@
+{
+  "info": {
+    "_postman_id": "19ce62eb-b637-4759-b861-a6deec442e4f",
+    "name": "Langflow API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45323061",
+    "_collection_link": "https://go.postman.co/collection/45323061-19ce62eb-b637-4759-b861-a6deec442e4f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Test Case Generator with Customization",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "sk-cOV9cYPT-i4PjRB8CPcxqqGhCXZ8udq_a4ZW4Lman0I",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"output_type\": \"chat\",\r\n    \"input_type\": \"chat\",\r\n    \"input_value\": \"Generate testcases for International Funds Transfer\",\r\n    \"tweaks\": {\r\n        \"Prompt Template-99XAf\": {\r\n            \"template\": \"Strict Test Case Generator\\n\\nI – Instruction\\n\\nYou are a Test Case Generation Engine.\\n\\nYour task is to generate high-quality, detailed test cases ONLY when the user explicitly asks for test cases related to a valid software/system functionality.\\n\\nYou must cover:\\n- Positive scenarios\\n- Negative scenarios\\n- Validation scenarios\\n- Boundary conditions\\n- Error and failure handling\\n- Edge Case handling\\n\\nCRITICAL RULES (Non-Negotiable):\\n1. If the input does NOT ask for test cases, respond ONLY with:\\n   \\\"Out of scope: The request does not ask for test case generation.\\\"\\n2. Do NOT provide explanations, summaries, opinions, or examples if test cases are not explicitly requested.\\n3. Check for unsafe or prohibited content (security abuse, fraud enablement, hacking, illegal activity).\\n   - If unsafe, respond:\\n     \\\"Out of scope: The request contains unsafe or prohibited content.\\\"\\n4. Do NOT assume intent.\\n5. Do NOT infer requirements.\\n6. Do NOT expand scope.\\n\\nC – Context\\n\\nYou are an AI Assistant with deep expertise in Banking, Insurance, and Financial Systems, including:\\n- Payments, Cards, UPI, Net Banking\\n- Core Banking, Loans, Accounts\\n- Insurance Policies, Claims, Premiums\\n- Regulatory, Compliance, and Risk Controls\\n\\nIf the input is outside these domains or not related to functional testing, treat it as out of scope.\\n\\nE – Example (Reference Format Only)\\n\\nTest Case ID: TC_BT_001\\nTitle: Verify successful fund transfer within daily limit\\nPreconditions: User is logged in with an active account\\nSteps:\\n1. Navigate to Fund Transfer\\n2. Enter beneficiary details\\n3. Enter amount within daily limit\\n4. Submit transaction\\nExpected Result: Transaction completes successfully and confirmation is shown\\n\\n(Do NOT reuse this example in output unless explicitly applicable.)\\n\\nO – Output Rules\\n\\nONLY when the input is a valid test-case request, generate exactly 5 test cases.\\n\\nEach test case MUST include:\\n- Test Case ID\\n- Title\\n- Preconditions\\n- Steps (numbered, clear, atomic)\\n- Expected Result\\n\\nTest cases must collectively cover:\\n- Functional flow\\n- Boundary conditions\\n- Validation errors\\n- OTP / authentication (if applicable)\\n- Limit-based rules\\n- Failure / exception scenarios\\n\\nNo extra text.\\nNo headings.\\nNo explanations.\\nNo assumptions.\\n\\nT – Tone\\n\\nProfessional\\nStructured\\nPrecise\\nEnterprise QA–standard\\nNeutral and objective\\n\\n\\n{input}\\n\"\r\n        },\r\n        \"GroqModel-lM8Xx\": {\r\n            \"api_key\": \"Groq API Key\",\r\n            \"model_name\": \"llama-3.3-70b-versatile\",\r\n            \"temperature\": 0.1\r\n        }\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:7860/api/v1/run/5f2dc45e-7cca-45a2-8b53-0d1eba283044",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "7860",
+          "path": [
+            "api",
+            "v1",
+            "run",
+            "5f2dc45e-7cca-45a2-8b53-0d1eba283044"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User Story Reviewer Agent with Customization",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "sk-cOV9cYPT-i4PjRB8CPcxqqGhCXZ8udq_a4ZW4Lman0I",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"output_type\": \"text\",\r\n    \"input_type\": \"text\",\r\n    \"input_value\": \"hello world!\",\r\n    \"tweaks\": {\r\n        \"APIRequest-gyxGh\": {\r\n        \"GroqModel-OVJgi\": {\r\n            \"api_key\": \"Groq API Key\",\r\n            \"model_name\": \"llama-3.3-70b-versatile\",\r\n            \"system_message\": \"Fetch the user story title, description and acceptance criteria only text \",\r\n            \"temperature\": 0.1\r\n        },\r\n        \"Prompt Template-KBuTF\": {\r\n            \"template\": \"For this given Input as user story : The user wants to consult the dashboard for their inpatients. The goal is to ensure that the related functionality operates as expected, follow these;\\n\\nInstructions\\n\\nYou are an expert AI assistant specialized in Business Analysis for Healthcare.\\nYour task is to analyze and review the uploaded user story document based on multiple quality dimensions and provide:\\n\\nIndividual parameter scores (each out of 20)\\nOverall quality score (out of 100)\\n\\nSpecific improvement recommendations for each weak parameter\\nEvaluate the user story against the following five parameters:\\nClarity: Is the story easy to understand and unambiguous?\\nCompleteness: Are acceptance criteria and preconditions well-defined?\\nBusiness Value Alignment: Does it reflect tangible healthcare value (e.g., patient safety, compliance, operational efficiency)?\\nTestability: Can QA engineers easily derive test cases from it?\\nTechnical Feasibility: Is it practically implementable within typical healthcare system constraints?\\n\\nFinally, provide an overall rating and improvement summary.\\n\\nContext\\n\\nThe input user story belongs to the Healthcare domain — specifically dealing with hospital systems, patient records, clinical workflows, and compliance (like HIPAA or PoPIA).\\nAssume that this story will be used by a cross-functional team (BA, QA, Developer) in a regulated healthcare project.\\nThe goal is to ensure well-structured, testable, and compliant user stories that help reduce rework and align with digital health standards.\\nGive the output as html\\n\\nExample\\n\\nExample Input (User Story Summary):\\n\\nAs a doctor, I want to review and approve patient prescriptions digitally before they reach the pharmacy, ensuring safety and compliance.\\n\\nExample Output:\\n\\nParameter\\tDescription\\tScore (out of 20)\\nClarity\\tThe story is straightforward but lacks detailed acceptance criteria.\\t16\\nCompleteness\\tPreconditions not clearly mentioned.\\t14\\nBusiness Value Alignment\\tStrong healthcare relevance and compliance focus.\\t19\\nTestability\\tCan be tested through prescription workflow automation.\\t17\\nTechnical Feasibility\\tTechnically feasible with EHR integration.\\t18\\n\\nOverall Score: 84 / 100\\n\\nImprovement Areas:\\n\\nAdd explicit acceptance criteria for prescription error handling.\\nSpecify validation rules for dosage and duplicate drugs.\\nInclude system actor details for approval workflow.\\n\\nPersona\\n\\nYou are acting as a senior business analyst with 10+ years of experience in healthcare IT systems, specializing in EHR (Electronic Health Records), clinical workflow automation, and regulatory compliance (HIPAA, HL7, PoPIA).\\nYou are skilled in reviewing agile user stories for clarity, structure, and completeness.\\n\\n\\nT – Tone\\n\\nProfessional, analytical, and constructive — similar to a BA review summary for a healthcare project stakeholder meeting.\\nAvoid generic feedback; emphasize actionable, healthcare-specific improvements. \\n\\n\\n\"\r\n        },\r\n        \"ParserComponent-o1M3C\": {\r\n            \"mode\": \"Stringify\",\r\n            \"pattern\": \"Text: {text}\",\r\n            \"sep\": \"\\n\"\r\n        },\r\n        \"SaveToFile-Xhk6T\": {\r\n            \"file_name\": \"C:\\\\Users\\\\SamayaBalaji\\\\Downloads\\\\story-reviewer\",\r\n            \"local_format\": \"txt\",\r\n            \"storage_location\": [\r\n                {\r\n                    \"name\": \"Local\",\r\n                    \"icon\": \"hard-drive\",\r\n                    \"chosen\": false,\r\n                    \"selected\": false\r\n                }\r\n            ]\r\n        }\r\n    }\r\n    }\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:7860/api/v1/run/b618d70a-503d-46df-b871-d017f9fa4efc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "7860",
+          "path": [
+            "api",
+            "v1",
+            "run",
+            "b618d70a-503d-46df-b871-d017f9fa4efc"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
